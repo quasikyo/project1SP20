@@ -47,44 +47,67 @@ bool UnsortedList<ItemType>::isFull() const {
 
 // Function: Adds newItem to the end of the list.
 template <class ItemType>
-void putItem(ItemType newItem){
-  if(length + 1 < Max_Items;){
+void UnsortedList<ItemType>::putItem(ItemType newItem){
+    for(int i = 0; i < length; i++){
+      if(info[i] == newItem){
+	throw DuplicateItem(); //duplicate exception
+      }
+    }
+    
+  if(length + 1 < Max_Items){
     info[length] = newItem;
     length++;
+    
+  } else {
+    throw FullList(); //Full list exception
+
   }
+  
 } // UnsortedList<ItemType>::putItem(ItemType newItem)
 
 
 // Function: deletes Item from the list.
 template <class ItemType>
-void deleteItem(ItemType Item){
-
-  //going backward to find the last item/possible duplicate
-  //and shifting info by 1 
-  for(int i = length; i > 0; i--){
-    if(info[i].equals(Item)){
-      for(int ii = itemNumber; ii < length-1; ii++){
-	info[ii]=info[ii+1];
-      }
-      break;
+void UnsortedList<ItemType>::deleteItem(ItemType Item){
+    bool inList = false;
+    if(length == 0){
+      throw EmptyList() ; //empty list exception
     }
-  }
-  //length decrement
-  length--;
+    //going backward to find the last item/possible duplicate
+    //and shifting info by 1 
+    for(int i = length; i > 0; i--){
+      if(info[i].equals(Item)){
+	for(int ii = i; ii < length-1; ii++){
+	  info[ii] = info[ii+1];
+	}
+	//length decrement and bool change
+	length--;
+	inList = true;
+	break;
+      }
+    }
+
+    if (!inList){
+      throw ItemNotFound(); //item not in list
+    }
   
- 
 } // UnsortedList<ItemType>::deleteItem()
 
 
 // Returns the number of elements in the list.
 template <class ItemType>
 int UnsortedList<ItemType>::getLength() const {
-    return length;
+  return length;
 } // UnsortedList<ItemType>::getLength()
 
 
 // Function: returns the item stored at index in the list
-ItemType getAt(int index) const{
-  return info[index];
+template <class ItemType>
+ItemType UnsortedList<ItemType>::getAt(int index) const{
+  if(index >= length || index < 0){
+    throw OutofBound();
+  } else{
+    return info[index];
+  }
 } // UnsortedList<ItemType>::getAt()
 
