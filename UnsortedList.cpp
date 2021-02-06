@@ -75,7 +75,7 @@ void UnsortedList<ItemType>::deleteItem(ItemType Item){
     }
     //going backward to find the last item/possible duplicate
     //and shifting info by 1 
-    for(int i = length-1 ; i >= 0; i--){
+    for(int i = 0 ; i < length; i++){
       if(info[i].equals(Item)){
 	for(int ii = i; ii < length-1; ii++){
 	  info[ii] = info[ii+1];
