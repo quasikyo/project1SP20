@@ -60,5 +60,5 @@ private:
 	int findIndex(ItemType item) const;
 };
 
-
 #endif
+
