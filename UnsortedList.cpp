@@ -107,7 +107,7 @@ ItemType UnsortedList<ItemType>::getAt(int index) const {
 template <class ItemType>
 int UnsortedList<ItemType>::findIndex(ItemType item) const {
     for (int i = 0; i < length; ++i) {
-        if (info[i] == item) {
+      if (info[i] == item) {
             return i;
         } // if
     } // for
