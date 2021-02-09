@@ -68,20 +68,18 @@ void UnsortedList<ItemType>::putItem(ItemType newItem) {
 } // UnsortedList<ItemType>::putItem(ItemType)
 
 
-// Function: deletes Item from the list.
+// Function: deletes Item from the list by replacing it with the last item in the list
 template <class ItemType>
 void UnsortedList<ItemType>::deleteItem(ItemType Item) {
-    // No items do delete
+    // No items to delete
     if (this->isEmpty()) {
         throw EmptyList();
     } // if
 
-    // Search for Item; delete and shift if found, exception otherwise
+    // Search for Item; delete and swap if found, exception otherwise
     int itemIndex = findIndex(Item);
     if (itemIndex != -1) {
-        for (int i = itemIndex; i < length - 1; ++i) {
-            info[i] = info[i + 1];
-        } // for
+        info[itemIndex] = info[length - 1];
         --length; // also takes care of edge case itemIndex = length - 1
     } else {
         throw ItemNotFound();
