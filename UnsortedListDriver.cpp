@@ -42,8 +42,8 @@ void testIntegerList() {
     UnsortedList<int> list(5);
     int number;
     string command;
+    inFile >> command; // initial command
     while (command != "Quit") {
-        inFile >> command;
         try {
             if (command == "MakeEmpty") {
                 list.makeEmpty();
@@ -92,6 +92,8 @@ void testIntegerList() {
         } catch (ItemNotFound) {
             outFile << "Item is not in the list" << endl;
         } // try
+
+        inFile >> command;
     } // while
 
     inFile.close();
@@ -107,8 +109,8 @@ void testStudentList() {
 
     UnsortedList<Student> students{5};
     string command;
+    inFile >> command; // initial command
     while (command != "Quit") {
-        inFile >> command;
         try {
 
         } catch (FullList) {
@@ -122,6 +124,8 @@ void testStudentList() {
         } catch (ItemNotFound) {
             outFile << "Item is not in the list" << endl;
         } // try
+
+        inFile >> command;
     } // while
 
     inFile.close();
