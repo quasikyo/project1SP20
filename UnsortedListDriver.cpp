@@ -77,6 +77,7 @@ void testIntegerList() {
             } else if (command == "GetAt") {
                 int index;
                 inFile >> index;
+                list.getAt(index); // trigger any exceptions first
                 outFile << "Item at index " << index << " is: " << list.getAt(index) << endl;
             } else {
                 outFile << "Unrecognized command" << endl;
