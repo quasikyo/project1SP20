@@ -101,79 +101,76 @@ void testIntegerList() {
 } // testIntegerList
 
 void testStudentList() {
-  // Add code to test the Student list, similar to testIntegerList
-  ifstream inFile;
-  inFile.open("studcommands.txt");
-  ofstream outFile;
-  outFile.open("outFile.txt");
+    // Add code to test the Student list, similar to testIntegerList
+    ifstream inFile;
+    inFile.open("studcommands.txt");
+    ofstream outFile;
+    outFile.open("outFile.txt");
 
-  UnsortedList<Student> students{11};
-  Student data;
-  string inputStr;
-  int inputint;
-  string command;
-  inFile >> command; // initial command
-  while (command != "Quit") {
-    try {
-      if (command == "MakeEmpty") {
-	students.makeEmpty();
-      } else if (command == "IsEmpty") {
-	if (students.isEmpty()) {
-	  outFile << "students is empty" << endl;
-	} else {
-	  outFile << "students is not empty" << endl;
-	} // if
-      } else if (command == "IsFull") {
-	if (students.isFull()) {
-	  outFile << "Students is full" << endl;
-	} else {
-	  outFile << "Students is not full" << endl;
-	} // if
-      } else if (command == "PutItem") {
-	inFile >> inputint;
-	data.setStudentID(inputint);
-	inFile >> inputStr;
-	data.setStudentName(inputStr);
-	students.putItem(data);
+    UnsortedList<Student> students{11};
+    Student data;
+    string inputStr;
+    int inputint;
+    string command;
+    inFile >> command; // initial command
+    while (command != "Quit") {
+        try {
+            if (command == "MakeEmpty") {
+                students.makeEmpty();
+            } else if (command == "IsEmpty") {
+                if (students.isEmpty()) {
+                    outFile << "list is empty" << endl;
+                } else {
+                    outFile << "list is not empty" << endl;
+                } // if
+            } else if (command == "IsFull") {
+                if (students.isFull()) {
+                    outFile << "List is full" << endl;
+                } else {
+                    outFile << "List is not full" << endl;
+                } // if
+            } else if (command == "PutItem") {
+                inFile >> inputint;
+                data.setStudentID(inputint);
+                inFile >> inputStr;
+                data.setStudentName(inputStr);
+                students.putItem(data);
+            } else if (command == "DeleteItem") {
+                inFile >> inputint;
+                data.setStudentID(inputint);
+                students.deleteItem(data);
+            } else if (command == "GetLength") {
+                outFile << students.getLength() << endl;
+            } else if (command == "PrintList") {
+                outFile << "List Items: ";
+                for (int index = 0; index < students.getLength(); index++) {
+                    outFile << students.getAt(index).getStudentID() << " " << students.getAt(index).getStudentName() << " ";
+                } // for
+                outFile << endl;
+            } else if (command == "GetAt") {
+                int index;
+                inFile >> index;
+                students.getAt(index);
+                outFile << "Item at index " << index << " is: " << students.getAt(index).getStudentID() << " " << students.getAt(index).getStudentName() << endl;
+            } else {
+                outFile << "Unrecognized command" << endl;
+            } // if
+        } catch (FullList) {
+            outFile << "List is full, Insertion failed" << endl;
+        } catch (EmptyList) {
+            outFile << "List is empty" << endl;
+        } catch (DuplicateItem) {
+            outFile << "Duplicate Item, Insertion failed" << endl;
+        } catch (OutofBound) {
+            outFile << "Index is out of range" << endl;
+        } catch (ItemNotFound) {
+            outFile << "Item is not in the list" << endl;
+        } // try
 
-      } else if (command == "DeleteItem") {
-	inFile >> inputint;
-	data.setStudentID(inputint);
-	students.deleteItem(data);
-	
-      } else if (command == "GetLength") {
-	outFile << students.getLength() << endl;
-      } else if (command == "PrintList") {
-	outFile << "Students Items: ";
-	for (int index = 0; index < students.getLength(); index++) {
-	  outFile << students.getAt(index).getStudentID() << " " << students.getAt(index).getStudentName()<<" ";
-	} // for
-	outFile << endl;
-      } else if (command == "GetAt") {
-	int index;
-	inFile >> index;
-	students.getAt(index);
-	outFile << "Item at index " << index << " is: " << students.getAt(index).getStudentID() << " " << students.getAt(index).getStudentName()<< endl;
-      } else {
-	outFile << "Unrecognized command" << endl;
-      } // if
-      
-    } catch (FullList) {
-      outFile << "List is full, Insertion failed" << endl;
-    } catch (EmptyList) {
-      outFile << "List is empty" << endl;
-    } catch (DuplicateItem) {
-      outFile << "Duplicate Item, Insertion failed" << endl;
-    } catch (OutofBound) {
-      outFile << "Index is out of range" << endl;
-    } catch (ItemNotFound) {
-      outFile << "Item is not in the list" << endl;
-    } // try
+        inFile >> command;
+    } // while
 
-    inFile >> command;
-  } // while
-
-  inFile.close();
-  outFile.close();
+    inFile.close();
+    outFile.close();
 } // testStudentList
 
